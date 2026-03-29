@@ -20,11 +20,11 @@ const SIDES = {
 };
 
 const TIMELINE_ITEMS = [
-    { time: '04:00', title: 'Bắt đầu di chuyển từ nhà trai đến nhà gái' },
+    { time: '04:00', title: 'Đi đón dâu' },
     { time: '09:00', title: 'Bắt đầu ăn uống tại nhà gái' },
-    { time: '11:00', title: 'Di chuyển lên Hà Nội' },
+    { time: '11:00', title: 'Rước dâu lên Hà Nội' },
     { time: '15:00', title: 'Làm lễ tại nhà trai' },
-    { time: '16:30', title: 'Đón khách tại tiệc cưới' },
+    { time: '16:30', title: 'Đón khách tại Golden Palace' },
     { time: '17:00', title: 'Lễ thành hôn' },
 ];
 
