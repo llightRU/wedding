@@ -1,17 +1,16 @@
 import { getState, updateState, subscribe } from '../../state/app-state.js';
+import { createAsyncImage } from '../../../utils/async-image.js';
 
 const GALLERY_IMAGES = [
-    { src: 'assets/images/z7650127744494_a2d3dd15743849918363dc759a93f4cb.jpg', alt: 'Ảnh cưới 1' },
-    { src: 'assets/images/z7650127797331_b209cb3c98e58590f19ed715e4a5a15e.jpg', alt: 'Ảnh cưới 2' },
-    { src: 'assets/images/z7650127952924_548054d77a0a822e978f945f120fedd0.jpg', alt: 'Ảnh cưới 3' },
-    { src: 'assets/images/z7650128111193_9a0608158b23f6ce0b063517981bbe76.jpg', alt: 'Ảnh cưới 4' },
-    { src: 'assets/images/z7650128213748_5dcc61fc3e253d5f9153a27b2ee5ab29.jpg', alt: 'Ảnh cưới 5' },
-    { src: 'assets/images/z7650128266764_437d02fb3df55c05bf504cccd4d1b528.jpg', alt: 'Ảnh cưới 6' },
-    { src: 'assets/images/z7653202237929_b12a0a9b9794d5a113f7f1133326cfdb.jpg', alt: 'Ảnh cưới 7' },
-    { src: 'assets/images/z7653202301990_6536c21497f0257add3a9f25a0dbe6c6.jpg', alt: 'Ảnh cưới 8' },
-    { src: 'assets/images/z7653202445379_c9b46fd8816ccedb66cbd6a222f1e334.jpg', alt: 'Ảnh cưới 9' },
-    { src: 'assets/images/z7653202518052_7b0d6e21a386dcb2c47e4f89c75f8e96.jpg', alt: 'Ảnh cưới 10' },
-];
+    'NLV_0046', 'NLV_0098', 'NLV_0123', 'NLV_0213', 'NLV_0240',
+    'NLV_0404', 'NLV_0546', 'NLV_0557', 'NLV_0672', 'NLV_0842',
+    'NLV_0939', 'NLV_1062', 'NLV_1584', 'NLV_1630', 'NLV_1969',
+    'NLV_2304', 'NLV_2351', 'NLV_9678', 'NLV_9709',
+].map((name, i) => ({
+    thumb: `assets/images/thumbs/${name}.webp`,
+    full: `assets/images/${name}.webp`,
+    alt: `Ảnh cưới ${i + 1}`,
+}));
 
 export function initGallery() {
     const section = document.getElementById('gallery');
@@ -45,7 +44,9 @@ function renderGrid() {
         item.style.opacity = '0';
         item.style.transform = 'translateY(30px)';
         item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        item.innerHTML = `<img src="${image.src}" alt="${image.alt}" loading="lazy" class="gallery__img">`;
+
+        const asyncImg = createAsyncImage(image.thumb, image.alt, 'gallery__img');
+        item.appendChild(asyncImg);
         item.addEventListener('click', () => openLightbox(i));
         grid.appendChild(item);
     });
@@ -93,7 +94,7 @@ function navigate(direction) {
 function showLightboxImage(index) {
     const img = document.getElementById('lightboxImg');
     const counter = document.getElementById('lightboxCounter');
-    img.src = GALLERY_IMAGES[index].src;
+    img.src = GALLERY_IMAGES[index].full;
     img.alt = GALLERY_IMAGES[index].alt;
     counter.textContent = `${index + 1} / ${GALLERY_IMAGES.length}`;
 }

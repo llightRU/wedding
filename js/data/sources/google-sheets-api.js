@@ -30,10 +30,12 @@ export async function postToGoogleSheets(data) {
             form.style.display = 'none';
 
             /* Add form fields */
+            const locationMap = { groom: 'Nhà trai', bride: 'Nhà gái', both: 'Cả hai' };
             const fields = {
                 name: data.name,
                 phone: data.phone,
                 attending: data.attending ? 'Có' : 'Không',
+                location: locationMap[data.location] || '',
                 guests: data.guests,
                 dietary: data.dietary || '',
             };

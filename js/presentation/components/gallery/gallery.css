@@ -13,6 +13,9 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-sm);
+    /* Skip rendering for offscreen rows */
+    content-visibility: auto;
+    contain-intrinsic-size: auto 2000px;
 }
 
 .gallery__item {
@@ -21,6 +24,10 @@
     border-radius: var(--radius-md);
     cursor: pointer;
     position: relative;
+    /* Promote to GPU layer — prevents scroll repaint */
+    will-change: transform;
+    transform: translateZ(0);
+    contain: layout style paint;
 }
 
 .gallery__item::after {
@@ -29,6 +36,7 @@
     inset: 0;
     background: rgba(47, 79, 63, 0);
     transition: background var(--transition-base);
+    z-index: 1;
 }
 
 .gallery__item:hover::after {
@@ -39,11 +47,6 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform var(--transition-base);
-}
-
-.gallery__item:hover .gallery__img {
-    transform: scale(1.05);
 }
 
 /* ── Lightbox overlay ── */

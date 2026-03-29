@@ -1,11 +1,12 @@
 import { wedding } from '../../../domain/models/wedding.js';
+import { createAsyncImage } from '../../../utils/async-image.js';
 
 const SLIDESHOW_IMAGES = [
-    'assets/images/hero_bg.jpg',
-    'assets/images/z7650127744494_a2d3dd15743849918363dc759a93f4cb.jpg',
-    'assets/images/z7650128266764_437d02fb3df55c05bf504cccd4d1b528.jpg',
-    'assets/images/z7650128213748_5dcc61fc3e253d5f9153a27b2ee5ab29.jpg',
-    'assets/images/z7653202237929_b12a0a9b9794d5a113f7f1133326cfdb.jpg',
+    'assets/images/hero_bg.webp',
+    'assets/images/NLV_0046.webp',
+    'assets/images/NLV_0240.webp',
+    'assets/images/NLV_0546.webp',
+    'assets/images/NLV_9678.webp',
 ];
 
 const SLIDE_INTERVAL = 6000;
@@ -79,23 +80,22 @@ function startSlideshow() {
     const container = document.getElementById('heroSlideshow');
     if (!container) return;
 
-    const slides = SLIDESHOW_IMAGES.map((src) => {
+    const slides = SLIDESHOW_IMAGES.map((src, i) => {
         const slide = document.createElement('div');
         slide.className = 'hero-couple__slide';
 
-        /* Inner wrapper shrink-wraps around image */
         const inner = document.createElement('div');
         inner.className = 'hero-couple__slide-inner';
 
-        const img = document.createElement('img');
-        img.src = src;
-        img.alt = '';
-        img.className = 'hero-couple__slide-img';
+        const asyncImg = createAsyncImage(src, '', 'hero-couple__slide-img', {
+            dark: true,
+            loading: i === 0 ? 'eager' : 'lazy',
+        });
 
         const overlay = document.createElement('div');
         overlay.className = 'hero-couple__slide-overlay';
 
-        inner.appendChild(img);
+        inner.appendChild(asyncImg);
         inner.appendChild(overlay);
         slide.appendChild(inner);
         container.appendChild(slide);

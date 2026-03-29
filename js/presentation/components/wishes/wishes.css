@@ -1,6 +1,6 @@
 #wishes {
     position: relative;
-    background: url('../../../../assets/images/wish.jpg') center center / cover no-repeat fixed;
+    background: url('../../../../assets/images/wish.webp') center center / cover no-repeat fixed;
     min-height: 700px;
     display: flex;
     align-items: center;

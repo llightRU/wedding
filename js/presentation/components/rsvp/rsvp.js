@@ -41,6 +41,25 @@ export function initRsvp() {
                             </div>
                         </div>
                     </div>
+                    <div class="rsvp__row" id="locationRow">
+                        <div class="rsvp__field rsvp__field--full">
+                            <label class="rsvp__label">Tham dự tại</label>
+                            <div class="rsvp__toggle">
+                                <label class="rsvp__radio">
+                                    <input type="radio" name="location" value="groom" checked>
+                                    <span class="rsvp__radio-label">Nhà trai</span>
+                                </label>
+                                <label class="rsvp__radio">
+                                    <input type="radio" name="location" value="bride">
+                                    <span class="rsvp__radio-label">Nhà gái</span>
+                                </label>
+                                <label class="rsvp__radio">
+                                    <input type="radio" name="location" value="both">
+                                    <span class="rsvp__radio-label">Cả hai</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
                     <div class="rsvp__row">
                         <div class="rsvp__field" id="guestsField">
                             <label class="rsvp__label" for="rsvpGuests">Số khách</label>
@@ -76,6 +95,7 @@ function bindAttendanceToggle() {
         radio.addEventListener('change', () => {
             const attending = radio.value === 'yes';
             document.getElementById('guestsField').style.display = attending ? '' : 'none';
+            document.getElementById('locationRow').style.display = attending ? '' : 'none';
         });
     });
 }
@@ -87,12 +107,16 @@ function bindForm() {
         clearErrors();
 
         const attending = document.querySelector('input[name="attendance"]:checked').value === 'yes';
+        const location = attending
+            ? document.querySelector('input[name="location"]:checked').value
+            : '';
         const data = {
             name: document.getElementById('rsvpName').value,
             phone: document.getElementById('rsvpPhone').value,
             guests: attending ? parseInt(document.getElementById('rsvpGuests').value) : 0,
             dietary: document.getElementById('rsvpDietary').value,
             attending,
+            location,
         };
 
         const { valid, errors } = validateRsvp(data);
