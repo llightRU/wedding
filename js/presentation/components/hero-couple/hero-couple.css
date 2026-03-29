@@ -1,0 +1,226 @@
+#hero-couple {
+    padding: 0;
+}
+
+.hero-couple {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: var(--color-bg-white);
+}
+
+/* ── Slideshow ── */
+.hero-couple__slideshow {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+/* ── Slide wrapper — uses inline-flex to shrink-wrap the image ── */
+.hero-couple__slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+    pointer-events: none;
+}
+
+.hero-couple__slide.active {
+    opacity: 1;
+}
+
+.hero-couple__slide.fade-out {
+    opacity: 0;
+}
+
+
+/* ── Inner wrapper ── */
+.hero-couple__slide-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* ── Image — cover on mobile, contain on desktop ── */
+.hero-couple__slide-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+}
+
+@media (min-width: 768px) {
+    .hero-couple__slide-inner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hero-couple__slide-img {
+        object-fit: contain;
+        object-position: center center;
+    }
+}
+
+.hero-couple__slide.active .hero-couple__slide-img {
+    animation: kenBurns 8s ease-in-out forwards;
+}
+
+@keyframes kenBurns {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.05); }
+}
+
+/* ── Overlay — matches inner wrapper = image dimensions only ── */
+.hero-couple__slide-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(47, 79, 63, 0.3) 0%,
+        rgba(47, 79, 63, 0.45) 50%,
+        rgba(47, 79, 63, 0.65) 100%
+    );
+    pointer-events: none;
+}
+
+/* ── Content ── */
+.hero-couple__content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: var(--color-text-light);
+    padding: var(--space-xl);
+}
+
+/* ── Entrance animation ── */
+.hero-anim {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.hero-anim.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ── Typography ── */
+.hero-couple__label {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-xl);
+}
+
+.hero-couple__name {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: var(--text-4xl);
+    line-height: 1.3;
+    margin: 0;
+}
+
+.hero-couple__ampersand {
+    display: block;
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: var(--text-2xl);
+    margin: var(--space-xs) 0;
+}
+
+.hero-couple__ampersand.visible {
+    opacity: 0.8;
+}
+
+.hero-couple__quote {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 300;
+    font-style: italic;
+    margin-top: var(--space-lg);
+    opacity: 0.7;
+}
+
+.hero-couple__date {
+    font-family: var(--font-body);
+    font-size: var(--text-lg);
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    margin-top: var(--space-md);
+    margin-bottom: var(--space-sm);
+}
+
+.hero-couple__venue {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 300;
+    letter-spacing: 0.1em;
+}
+
+.hero-couple__venue.visible {
+    opacity: 0.8;
+}
+
+/* ── Scroll indicator ── */
+.hero-couple__scroll-indicator {
+    position: absolute;
+    bottom: var(--space-xl);
+    z-index: 2;
+    color: var(--color-text-light);
+}
+
+.hero-couple__scroll-indicator.visible {
+    opacity: 0.6;
+}
+
+.hero-couple__scroll-indicator.bounce {
+    animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+}
+
+/* ── Desktop ── */
+@media (min-width: 768px) {
+    .hero-couple__name {
+        font-size: var(--text-5xl);
+    }
+
+    .hero-couple__ampersand {
+        font-size: var(--text-3xl);
+    }
+
+    .hero-couple__date {
+        font-size: var(--text-xl);
+    }
+
+    .hero-couple__label {
+        font-size: var(--text-base);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-anim {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .hero-couple__slide.active .hero-couple__slide-img {
+        animation: none;
+    }
+}
