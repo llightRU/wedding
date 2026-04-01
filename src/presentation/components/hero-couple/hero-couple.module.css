@@ -1,0 +1,210 @@
+#hero-couple {
+    padding: 0;
+}
+
+.heroCouple {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: var(--color-bg-white);
+}
+
+/* ── Slideshow ── */
+.slideshow {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+/* ── Slide wrapper ── */
+.slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+    pointer-events: none;
+}
+
+.slideActive {
+    opacity: 1;
+}
+
+.slideFadeOut {
+    opacity: 0;
+}
+
+/* ── Inner wrapper ── */
+.slideInner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* ── Image ── */
+.slideImg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+}
+
+@media (min-width: 768px) {
+    .slideInner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .slideImg {
+        object-fit: contain;
+        object-position: center center;
+    }
+}
+
+.slideActive .slideImg {
+    animation: kenBurns 8s ease-in-out forwards;
+}
+
+@keyframes kenBurns {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.05); }
+}
+
+/* ── Overlay ── */
+.slideOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(47, 79, 63, 0.3) 0%,
+        rgba(47, 79, 63, 0.45) 50%,
+        rgba(47, 79, 63, 0.65) 100%
+    );
+    pointer-events: none;
+}
+
+/* ── Content ── */
+.content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: var(--color-text-light);
+    padding: var(--space-xl);
+}
+
+/* ── Entrance animation ── */
+.heroAnim {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* ── Typography ── */
+.label {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-xl);
+}
+
+.name {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: var(--text-3xl);
+    line-height: 1.3;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.ampersand {
+    display: block;
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: var(--text-2xl);
+    margin: var(--space-xs) 0;
+}
+
+.quote {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 300;
+    font-style: italic;
+    margin-top: var(--space-lg);
+    opacity: 0.7;
+}
+
+.date {
+    font-family: var(--font-body);
+    font-size: var(--text-lg);
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    margin-top: var(--space-md);
+    margin-bottom: var(--space-sm);
+}
+
+.venue {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 300;
+    letter-spacing: 0.1em;
+}
+
+/* ── Scroll indicator ── */
+.scrollIndicator {
+    position: absolute;
+    bottom: var(--space-xl);
+    z-index: 2;
+    color: var(--color-text-light);
+    cursor: pointer;
+}
+
+.bounce {
+    animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+}
+
+/* ── Desktop ── */
+@media (min-width: 768px) {
+    .name {
+        font-size: var(--text-5xl);
+    }
+
+    .ampersand {
+        font-size: var(--text-3xl);
+    }
+
+    .date {
+        font-size: var(--text-xl);
+    }
+
+    .label {
+        font-size: var(--text-base);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .heroAnim {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .slideActive .slideImg {
+        animation: none;
+    }
+}

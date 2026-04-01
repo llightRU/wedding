@@ -1,0 +1,23 @@
+.musicPlayer {
+    position: fixed;
+    bottom: var(--space-xl);
+    right: var(--space-xl);
+    z-index: var(--z-overlay);
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-full);
+    background: var(--color-primary);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform var(--transition-fast), background var(--transition-fast);
+    cursor: pointer;
+    border: none;
+}
+
+.musicPlayer:hover {
+    transform: scale(1.1);
+    background: var(--green-dark);
+}
