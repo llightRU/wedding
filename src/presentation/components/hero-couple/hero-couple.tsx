@@ -2,14 +2,15 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { wedding } from '@/domain/models/wedding';
+import { asset } from '@/utils/base-path';
 import styles from './hero-couple.module.css';
 
 const SLIDESHOW_IMAGES = [
-    '/assets/images/hero_bg.webp',
-    '/assets/images/NLV_0046.webp',
-    '/assets/images/NLV_0240.webp',
-    '/assets/images/NLV_0546.webp',
-    '/assets/images/NLV_9678.webp',
+    asset('/assets/images/hero_bg.webp'),
+    asset('/assets/images/NLV_0046.webp'),
+    asset('/assets/images/NLV_0240.webp'),
+    asset('/assets/images/NLV_0546.webp'),
+    asset('/assets/images/NLV_9678.webp'),
 ];
 
 const SLIDE_INTERVAL = 6000;

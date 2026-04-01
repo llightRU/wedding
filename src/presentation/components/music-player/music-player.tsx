@@ -1,9 +1,10 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { asset } from '@/utils/base-path';
 import styles from './music-player.module.css';
 
-const MUSIC_SRC = '/assets/audio/music.mp3';
+const MUSIC_SRC = asset('/assets/audio/music.mp3');
 
 export function MusicPlayer() {
     const [isPlaying, setIsPlaying] = useState(false);

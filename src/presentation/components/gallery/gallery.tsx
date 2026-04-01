@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useGallery } from '@/presentation/hooks/use-gallery';
+import { asset } from '@/utils/base-path';
 import styles from './gallery.module.css';
 
 const GALLERY_IMAGES = [
@@ -10,8 +11,8 @@ const GALLERY_IMAGES = [
     'NLV_0939', 'NLV_1062', 'NLV_1584', 'NLV_1630', 'NLV_1969',
     'NLV_2304', 'NLV_2351', 'NLV_9678', 'NLV_9709',
 ].map((name, i) => ({
-    thumb: `/assets/images/thumbs/${name}.webp`,
-    full: `/assets/images/${name}.webp`,
+    thumb: asset(`/assets/images/thumbs/${name}.webp`),
+    full: asset(`/assets/images/${name}.webp`),
     alt: `Ảnh cưới ${i + 1}`,
 }));
 
